@@ -1,0 +1,7 @@
+@relation pandasdata
+@attribute average_depth real
+@attribute median_depth real
+@attribute minimum_depth real
+@attribute standard_deviation real
+@data
+8.72833531154002,6.823213100433349,2.279555082321167,5.141153325503997
