@@ -16,6 +16,10 @@ def median_depth(df):
 
 def minimum_depth(df): 
     return mask(df).min()
+def standard_deviation(df):
+    return mask(df).std()
+def points_closer_than_5(df):
+    return df[df <= 5].count()
 
 #Median Dept: 2.00  - Matt
 #Closest Depth: 0.5  - Matt
@@ -23,3 +27,6 @@ def minimum_depth(df):
 print "Average Depth: " + str(average_depth(df))
 print "Median Depth: " + str(median_depth(df))
 print "Minimum Depth: " + str(minimum_depth(df))
+print "Standard Deviation: " + str(standard_deviation(df))
+print "closer than 5 meters: " +str(points_closer_than_5(df))
+
