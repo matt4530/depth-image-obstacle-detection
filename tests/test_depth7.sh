@@ -1,0 +1,1 @@
+python algorithms.py tests/data/depth7.arff tests/data/depth7.csv tests/data/depth7.csv
