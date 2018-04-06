@@ -36,25 +36,37 @@ function setImages(imageName) {
 
 function setClass(currentImageName, classification) {
   results[currentImageName.replace('depth_viz', 'depth').replace('.jpg', '.txt')] = classification;
+  nextImage();
 }
 
 function yesClick() {
-  setClass(imageNames[currentImageIndex], 'yes');
-  nextImage();
+  if (currentImageIndex < imageNames.length) {
+    setClass(imageNames[currentImageIndex], 'yes');
+  }
+  else {
+    finished();
+  }
+  display();
+}
+
+function finished() {
+  document.getElementById('done_text').innerHTML = 'All done!';
 }
 
 function noClick() {
-  setClass(imageNames[currentImageIndex], 'no');
-  nextImage();
+  if (currentImageIndex < imageNames.length) {
+    setClass(imageNames[currentImageIndex], 'no');
+  }
+  else {
+    finished();
+  }
+  display();
 }
 
 function nextImage() {
   console.log('results so far', results);
   currentImageIndex++;
-  display();
-  if (currentImageIndex < imageNames.length) {
-    setImages(imageNames[currentImageIndex]);
-  }
+  setImages(imageNames[currentImageIndex]);
 }
 
 function display() {
@@ -67,7 +79,7 @@ function display() {
  * TO CHANGE DATA SETS, CHANGE THIS VARIABLE
  * 
  */
-const SET_TYPE = 'train';
+const SET_TYPE = 'test';
 
 
 const FOLDER_DIR = 'datasets/' + SET_TYPE +'/';

@@ -6,6 +6,7 @@
   </title>
   <style>
     body {
+      font-family: verdana;
       text-align: center;
     }
     header, article {
@@ -23,6 +24,10 @@
       height: 30px;
       margin: 5px;
     }
+    #done_text {
+      color: red;
+      font-size: 3em;
+    }
   </style>
 </head>
 <body>
@@ -31,12 +36,20 @@
       DATA SET TYPE
     </span>
     <br>
+    <small>
+      You can also press y or n for yes or no.
+    </small>
+    <br>
     <button id="yes_button" onclick="yesClick()">
       YES
     </button>
     <button id="no_button" onclick="noClick()">
       NO
     </button>
+    <br>
+    <span id="done_text">
+      
+    </span>
   </header>
   <article>
     <img id="rgb_image" src="#"/>
