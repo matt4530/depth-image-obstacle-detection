@@ -10,6 +10,7 @@ def pandas2arff(df,filename,wekaname = "pandasdata",cleanstringdata=True,cleanna
               To suppress this, set this to False
     """
     import re
+    import numpy as np
     
     def cleanstring(s):
         if s!="?":
