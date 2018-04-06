@@ -51,8 +51,10 @@ function noClick() {
 function nextImage() {
   console.log('results so far', results);
   currentImageIndex++;
-  setImages(imageNames[currentImageIndex]);
   display();
+  if (currentImageIndex < imageNames.length) {
+    setImages(imageNames[currentImageIndex]);
+  }
 }
 
 function display() {
