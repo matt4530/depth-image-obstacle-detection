@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+<head>
+  <title>
+    CS 478 Group Project Classifier
+  </title>
+  <style>
+    body {
+      text-align: center;
+    }
+    header, article {
+      margin-bottom: 50px;
+    }
+    img {
+      max-width: 45%;
+    }
+    textarea {
+      height: 150px;
+      width: 70%;
+    }
+    button {
+      width: 80px;
+      height: 30px;
+      margin: 5px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <span id="data_set_type">
+      DATA SET TYPE
+    </span>
+    <br>
+    <button id="yes_button" onclick="yesClick()">
+      YES
+    </button>
+    <button id="no_button" onclick="noClick()">
+      NO
+    </button>
+  </header>
+  <article>
+    <img id="rgb_image" src="#"/>
+    <img id="depth_image" src="#"/>
+  </article>
+  <footer>
+    <textarea id="results"></textarea>
+  </footer>
+  <script src="scripts.js">
+  </script>
+</body>
+</html>
