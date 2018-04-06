@@ -5,9 +5,9 @@ import pandas as pd
 fast = cv2.FastFeatureDetector_create(threshold=25, nonmaxSuppression=True)
 
 #Feature detection parameters
-feature_params = dict( maxCorners = 500,
+feature_params = dict( maxCorners = 150,
                        qualityLevel = 0.3,
-                       minDistance = 1,
+                       minDistance = 2,
                        blockSize =13
                        # useHarrisDetector =True
                        )

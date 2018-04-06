@@ -8,13 +8,13 @@ Must have the [pandas](https://pypi.python.org/pypi/pandas) and [numpy](https://
 ### Command Line
 
 ```bash
-python algorithms.py arff_output_file.arff file1.csv [file2.csv, file3.csv...]
+python algorithms.py arff_output_file.arff dataset_folder_with_csv_and_rgb_files
 ```
 
 Example
 
 ```bash
-python algorithms.py arff_output_file.arff file1.csv file2.csv
+python algorithms.py arff_output_file.arff datasets/train/
 ```
 
 ### From Python
