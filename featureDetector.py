@@ -12,8 +12,8 @@ feature_params = dict( maxCorners = 500,
                        # useHarrisDetector =True
                        )
 
-fl = pd.read_csv('./depth025.txt',header=None, delim_whitespace=True)
-rgb =cv2.imread('./rbg025.jpg')
+fl = pd.read_csv('./datasets/validation/depth013.txt',header=None, delim_whitespace=True)
+rgb =cv2.imread('./datasets/validation/rbg013.jpg')
 frame = np.array(fl.values)
 
 nearpoints = np.isfinite(frame)
