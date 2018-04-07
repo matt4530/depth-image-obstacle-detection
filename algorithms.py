@@ -6,8 +6,20 @@ import glob, os, json, sys, cv2
 
 # globals, cached 
 classification = ""
-fast = cv2.FastFeatureDetector_create(threshold=25, nonmaxSuppression=True)
 feature_params = dict( maxCorners = 150, qualityLevel = 0.3, minDistance = 2, blockSize =13)
+
+params = cv2.SimpleBlobDetector_Params()
+
+# Change thresholds
+params.minThreshold = 1
+params.maxThreshold = 255
+params.filterByArea = True
+params.minArea = 400
+params.filterByCircularity = False
+params.filterByConvexity = True
+params.minConvexity = 0.2
+params.filterByInertia = True
+params.minInertiaRatio = 0.01
 # TODO: Cache the mask array
 
 
@@ -29,6 +41,27 @@ def standard_deviation(df):
     
 def points_closer_than_5(df):
     return mask(df[df <= 5]).count()
+
+def detect_blobs(df, rgb_file_name):
+    depth = np.array(df.values)
+    rgb = cv2.imread(rgb_file_name)
+    farpoints = np.isnan(depth)
+    grey = cv2.cvtColor(rgb,cv2.COLOR_RGB2GRAY)
+    mask = np.ones(np.shape(grey))
+    mask[farpoints] = 0
+    mask = mask.astype(np.uint8)
+    detector = cv2.SimpleBlobDetector_create(params)
+    kp = detector.detect(grey)
+    #filtering out the keypoints by depth > 20
+    kpList = []
+    kpAreas = []
+    for i in range(len(kp)):
+        if mask[int(kp[i].pt[1]),int(kp[i].pt[0])] !=0:
+            kpList.append(kp[i])
+            kpAreas.append(kp[i].size)
+    return kpList, np.array(kpAreas)
+
+
 
 def detect_features(df, rgb_file_name):
     frame = np.array(df.values)
@@ -58,6 +91,8 @@ def get_file_features(file_name, rgb_file_name):
     file_dataframe = pd.read_csv(file_name, header=None, delim_whitespace=True)
 
     detected_points = detect_features(file_dataframe, rgb_file_name)
+    blob_points, blob_areas = detect_blobs(file_dataframe,rgb_file_name)
+    #we can sum the total blob areas, average, or we can lots of small ones
     
 
     return {
@@ -68,6 +103,9 @@ def get_file_features(file_name, rgb_file_name):
         'closer_than_5': points_closer_than_5(file_dataframe),
         'corners': detected_points.size / 2,
         'corners_closer_than_5': features_closer_than_5(detected_points, file_dataframe),
+        'number_of_blobs': len(blob_points),
+        'total_blob_area': np.sum(blob_areas),
+        'average_blob_size': np.average(blob_areas)
         'class': get_classification(tail)
     }
 
@@ -87,6 +125,9 @@ def get_all_file_features(file_name_list):
             'closer_than_5', 
             'corners',
             'corners_closer_than_5',
+            'number_of_blobs',
+            'total_blob_area',
+            'average_blob_size',
             'class'
         )
     )
