@@ -105,7 +105,7 @@ def get_file_features(file_name, rgb_file_name):
         'corners_closer_than_5': features_closer_than_5(detected_points, file_dataframe),
         'number_of_blobs': len(blob_points),
         'total_blob_area': np.sum(blob_areas),
-        'average_blob_size': np.average(blob_areas)
+        'average_blob_size': np.average(blob_areas),
         'class': get_classification(tail)
     }
 
