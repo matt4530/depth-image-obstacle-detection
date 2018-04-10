@@ -54,7 +54,7 @@ def detect_blobs(df, rgb_file_name):
     kp = detector.detect(grey)
     #filtering out the keypoints by depth > 20
     kpList = []
-    kpAreas = []
+    kpAreas = [0]
     for i in range(len(kp)):
         if mask[int(kp[i].pt[1]),int(kp[i].pt[0])] !=0:
             kpList.append(kp[i])
